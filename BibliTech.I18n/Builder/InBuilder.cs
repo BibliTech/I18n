@@ -3,6 +3,7 @@ using BibliTech.I18n.InInputs;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace BibliTech.I18n.Builder
@@ -18,6 +19,16 @@ namespace BibliTech.I18n.Builder
         public InBuilder AddJsonFile(string jsonFilePath, string languageCode, bool useAsFallback = false)
         {
             return this.AddJsonFile(() => File.OpenRead(jsonFilePath), languageCode, useAsFallback);
+        }
+
+        public InBuilder AddJsonResource(string name, string languageCode, bool useAsFallback = false)
+        {
+            return this.AddJsonResource(Assembly.GetCallingAssembly(), name, languageCode, useAsFallback);
+        }
+
+        public InBuilder AddJsonResource(Assembly assembly, string name, string languageCode, bool useAsFallback = false)
+        {
+            return this.AddJsonFile(() => assembly.GetManifestResourceStream(name), languageCode, useAsFallback);
         }
 
         public InBuilder AddJsonFile(Stream jsonFileStream, string languageCode, bool useAsFallback = false)
