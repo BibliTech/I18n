@@ -73,6 +73,12 @@ namespace BibliTech.I18n.Builder
             return this;
         }
 
+        public InBuilder SetFallbackStrategy(FallbackStrategy fallbackStrategy)
+        {
+            this.FallbackStrategy = fallbackStrategy;
+            return this;
+        }
+
         public InProvider Build()
         {
             return new InProvider(this);

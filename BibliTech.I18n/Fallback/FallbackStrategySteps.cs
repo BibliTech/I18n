@@ -20,7 +20,7 @@ namespace BibliTech.I18n.Fallback
 
             return fallbackLanguageCode == null ?
                 null :
-                provider.Lookup(fallbackLanguageCode, key);
+                provider.Lookup(fallbackLanguageCode, key, false);
         }
 
     }

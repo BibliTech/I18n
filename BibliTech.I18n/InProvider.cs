@@ -11,7 +11,7 @@ namespace BibliTech.I18n
     {
 
         string? FallbackLanguage { get; }
-        string Lookup(string languageCode, string key);
+        string Lookup(string languageCode, string key, bool shouldFallback = true);
 
     }
 
@@ -27,12 +27,25 @@ namespace BibliTech.I18n
         {
             this.items = new Dictionary<string, Dictionary<string, string>>();
             this.FallbackStrat = builder.FallbackStrategy;
+            this.FallbackLanguage = builder.FallbackLanguage;
 
             this.LoadItems(builder);
         }
 
-        public string Lookup(string languageCode, string key)
+        public string Lookup(string languageCode, string key, bool shouldFallback = true)
         {
+            Func<string> useFallbackOrThrow = () =>
+            {
+                if (shouldFallback)
+                {
+                    return this.FallbackStrat.Lookup(key, this);
+                }
+                else
+                {
+                    return null;
+                }
+            };
+
             if (this.items.TryGetValue(languageCode, out var langDict))
             {
                 if (langDict.TryGetValue(key, out var result))
@@ -41,18 +54,13 @@ namespace BibliTech.I18n
                 }
                 else
                 {
-                    return this.UseFallback(key);
+                    return useFallbackOrThrow();
                 }
             }
             else
             {
-                return this.UseFallback(key);
+                return useFallbackOrThrow();
             }
-        }
-
-        private string UseFallback(string key)
-        {
-            return this.FallbackStrat.Lookup(key, this);
         }
 
         private void LoadItems(InBuilder builder)
