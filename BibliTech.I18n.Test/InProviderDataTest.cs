@@ -13,9 +13,21 @@ namespace BibliTech.I18n.Test
         const string TestInvalidKeyword = "SOMETHING_NONEXISTANCE";
 
         [Fact]
-        public void ShouldLoadJsonFile()
+        public void ShouldLoadJsonFileFromFileSystem()
         {
             var provider = this.BuildProvider();
+
+            this.AssertCommonData(provider);
+            Assert.Equal(TestUtils.DataJsonEnLanguageCode, provider.FallbackLanguage);
+        }
+
+        [Fact]
+        public void ShouldLoadJsonFileFromEmbeddedResources()
+        {
+            var provider = new InBuilder()
+                .AddJsonResources("BibliTech.I18n.Test.Embed.Json.", "text-")
+                .SetFallbackLanguage("en")
+                .Build();
 
             this.AssertCommonData(provider);
             Assert.Equal(TestUtils.DataJsonEnLanguageCode, provider.FallbackLanguage);
