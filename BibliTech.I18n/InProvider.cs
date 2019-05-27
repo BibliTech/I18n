@@ -14,6 +14,7 @@ namespace BibliTech.I18n
 
         string? FallbackLanguage { get; }
         string Lookup(string languageCode, string key, bool shouldFallback = true);
+        string Lookup(CultureInfo culture, string key, bool shouldFallback = true);
         string Lookup(string key, bool shouldFallback = true);
 
     }
@@ -32,13 +33,18 @@ namespace BibliTech.I18n
             this.items = new Dictionary<string, Dictionary<string, string>>();
             this.FallbackStrat = builder.FallbackStrategy;
             this.FallbackLanguage = builder.FallbackLanguage;
+            this.CodeLookup = builder.CodeLookup;
 
             this.LoadItems(builder);
         }
 
         public string Lookup(string key, bool shouldFallback = true)
         {
-            var culture = CultureInfo.CurrentUICulture;
+            return this.Lookup(CultureInfo.CurrentUICulture, key, shouldFallback);
+        }
+
+        public string Lookup(CultureInfo culture, string key, bool shouldFallback = true)
+        {
             return this.Lookup(this.CodeLookup.Lookup(culture), key, shouldFallback);
         }
 

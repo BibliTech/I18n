@@ -26,7 +26,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\BibliTech.I18n\BibliTech.I18n.csproj" />
+      <ProjectReference Include="..\BibliTech.I18n.AspNetCore\BibliTech.I18n.AspNetCore.csproj" />
+      <ProjectReference Include="..\Fluint.AspNetCore\Fluint.AspNetCore.csproj" />
     </ItemGroup>
 
     <ItemGroup>

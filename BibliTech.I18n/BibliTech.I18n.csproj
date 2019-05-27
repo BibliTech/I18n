@@ -9,10 +9,10 @@
         <Authors>BibliTech Inc.</Authors>
         <Product>BibliTech I18n</Product>
         <Description>A .NET Standard library for language looking up. Highly customizable and modules can be made for different file structure and behaviors.</Description>
-        <Copyright>Copyright 2018 BibliTech Inc</Copyright>
+        <Copyright>Copyright 2019 BibliTech Inc</Copyright>
         <PackageLicenseExpression></PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/BibliTech/I18n</PackageProjectUrl>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
     </PropertyGroup>
 
     <ItemGroup>

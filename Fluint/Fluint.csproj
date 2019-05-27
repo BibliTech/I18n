@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+      <LangVersion>8.0</LangVersion>
+      <NullableContextOptions>enable</NullableContextOptions>
+      <Version>1.0.3</Version>
+      <Authors>BibliTech</Authors>
+      <Description>A Fluent library for I18n lookup.</Description>
+      <Copyright>Copyright 2019 BibliTech</Copyright>
+      <PackageProjectUrl>https://github.com/BibliTech/I18n</PackageProjectUrl>
+      <RepositoryUrl>https://github.com/BibliTech/I18n</RepositoryUrl>
+      <PackageTags>standard i18n fluent netstandard2.0</PackageTags>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BibliTech.I18n\BibliTech.I18n.csproj" />
+  </ItemGroup>
+
+</Project>
