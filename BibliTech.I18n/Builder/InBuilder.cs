@@ -1,4 +1,5 @@
-﻿using BibliTech.I18n.Fallback;
+﻿using BibliTech.I18n.CodeLookup;
+using BibliTech.I18n.Fallback;
 using BibliTech.I18n.InInputs;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace BibliTech.I18n.Builder
         public string? FallbackLanguage { get; set; }
         public FallbackStrategy FallbackStrategy { get; set; } = FallbackStrategy.DefaultFallbackStrategy;
         public List<IInInput> Inputs { get; set; } = new List<IInInput>();
+        public ICodeLookup CodeLookup { get; set; } = new TwoLetterCodeLookup();
 
         public InBuilder AddJsonFile(string jsonFilePath, string languageCode, bool useAsFallback = false)
         {

@@ -1,7 +1,9 @@
 ﻿using BibliTech.I18n.Builder;
+using BibliTech.I18n.CodeLookup;
 using BibliTech.I18n.Fallback;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace BibliTech.I18n
@@ -12,6 +14,7 @@ namespace BibliTech.I18n
 
         string? FallbackLanguage { get; }
         string Lookup(string languageCode, string key, bool shouldFallback = true);
+        string Lookup(string key, bool shouldFallback = true);
 
     }
 
@@ -22,6 +25,7 @@ namespace BibliTech.I18n
 
         public FallbackStrategy FallbackStrat { get; private set; }
         public string? FallbackLanguage { get; private set; }
+        public ICodeLookup CodeLookup { get; private set; }
 
         internal InProvider(InBuilder builder)
         {
@@ -30,6 +34,12 @@ namespace BibliTech.I18n
             this.FallbackLanguage = builder.FallbackLanguage;
 
             this.LoadItems(builder);
+        }
+
+        public string Lookup(string key, bool shouldFallback = true)
+        {
+            var culture = CultureInfo.CurrentUICulture;
+            return this.Lookup(this.CodeLookup.Lookup(culture), key, shouldFallback);
         }
 
         public string Lookup(string languageCode, string key, bool shouldFallback = true)
